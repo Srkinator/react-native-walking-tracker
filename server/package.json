@@ -1,0 +1,18 @@
+{
+  "name": "server-for-running-tracker-app",
+  "version": "1.0.0",
+  "description": "Express server connected to MongoDB to handle Users and Tracks Collections",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Srdjan Popovic",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^4.0.1",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.9.10",
+    "nodemon": "^2.0.3"
+  }
+}
