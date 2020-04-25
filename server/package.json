@@ -4,7 +4,8 @@
   "description": "Express server connected to MongoDB to handle Users and Tracks Collections",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon src/index.js"
   },
   "author": "Srdjan Popovic",
   "license": "ISC",
