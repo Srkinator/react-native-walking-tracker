@@ -1,9 +1,12 @@
+require('./models/User')
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose')
 
 const { mongoUri } = require('../config')
 const authRoutes = require('./routes/authRoutes');
+const requireAuth = require('./middlewares/requireAuth')
 
 
 const app = express();
@@ -25,7 +28,7 @@ mongoose.connection.on('error', err => {
   console.error('Error connecting to mongo', err);
 });
 
-app.get('/', (req, res) => {
+app.get('/', requireAuth, (req, res) => {
   res.send(`Your email: ${req.user.email}`);
 });
 
