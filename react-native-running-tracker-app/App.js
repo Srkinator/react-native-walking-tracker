@@ -28,7 +28,6 @@ export const AuthContext = createContext()
 export default () => {
   const authHookObj = useAuth()
   return (
-
     <NavigationContainer ref={navigationRef}>
       <AuthContext.Provider value={authHookObj}>
           {authHookObj.state.token

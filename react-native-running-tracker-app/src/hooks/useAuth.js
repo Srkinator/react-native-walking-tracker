@@ -1,7 +1,7 @@
 import { useEffect, useReducer } from 'react'
 import { AsyncStorage } from 'react-native';
 
-import api from '../api/api';
+import axios from '../api/axios';
 
 
 const initialState = {
@@ -44,7 +44,7 @@ const useAuth = (navigate) => {
 
   const signup = async ({ email, password }) => {
     try {
-      const response = await api.post('/signup', { email, password });
+      const response = await axios.post('/signup', { email, password });
       await AsyncStorage.setItem('token', response.data.token);
       dispatch({ type: 'signin', payload: response.data.token });
     } catch (err) {
@@ -57,7 +57,7 @@ const useAuth = (navigate) => {
 
   const signin = async ({ email, password }) => {
     try {
-      const response = await api.post('/signin', { email, password });
+      const response = await axios.post('/signin', { email, password });
       await AsyncStorage.setItem('token', response.data.token);
       dispatch({ type: 'signin', payload: response.data.token });
     } catch (err) {
