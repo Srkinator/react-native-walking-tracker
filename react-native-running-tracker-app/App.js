@@ -1,4 +1,4 @@
-import React, { createContext } from 'react';
+import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { FontAwesome } from '@expo/vector-icons';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -13,6 +13,7 @@ import TrackListScreen from './src/screens/TrackListScreen';
 
 import useAuth from './src/hooks/useAuth'
 import { navigationRef } from './src/navigationRef'
+import { AuthContext } from './src/context/AuthContext'
 
 const Stack = createStackNavigator();
 const BottomTab = createBottomTabNavigator();
@@ -22,7 +23,6 @@ const TrackListFlow = props => <Stack.Navigator>
   <Stack.Screen name="TrackDetail" component={TrackDetailScreen} />
 </Stack.Navigator>
 
-export const AuthContext = createContext()
 
 
 export default () => {
