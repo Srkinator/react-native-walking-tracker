@@ -1,14 +1,42 @@
-import React from 'react';
-import { View, StyleSheet, Text } from 'react-native';
+import React, { useContext } from 'react';
+import { View, StyleSheet } from 'react-native';
+import { AuthContext } from '../context/AuthContext';
+import AuthForm from '../components/AuthForm';
+import NavLink from '../components/NavLink';
 
-const SignupScreen = () => {
+const SignupScreen = ({ navigation }) => {
+  const { state, signup, clearErrorMessage } = useContext(AuthContext);
+
   return (
-    <View>
-      <Text style={{ fontSize: 48 }}>SignupScreen</Text>
+    <View style={styles.container}>
+      <AuthForm
+        headerText="Sign Up for Tracker"
+        errorMessage={state.errorMessage}
+        submitButtonText="Sign Up"
+        onSubmit={signup}
+        clearErrorMessage={clearErrorMessage}
+      />
+      <NavLink
+        routeName="Signin"
+        text="Already have an account? Sign in instead!"
+        navigation={navigation}
+      />
     </View>
   );
 };
 
-const styles = StyleSheet.create({});
+SignupScreen.navigationOptions = () => {
+  return {
+    header: null
+  };
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    marginBottom: 250
+  }
+});
 
 export default SignupScreen;
