@@ -3,6 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { FontAwesome } from '@expo/vector-icons';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import AccountScreen from './src/screens/AccountScreen';
 import SigninScreen from './src/screens/SigninScreen';
@@ -28,47 +29,49 @@ const TrackListFlow = props => <Stack.Navigator>
 export default () => {
   const authHookObj = useAuth()
   return (
-    <NavigationContainer ref={navigationRef}>
-      <AuthContext.Provider value={authHookObj}>
-          {authHookObj.state.token
-            ? <React.Fragment>
-              <BottomTab.Navigator>
-                <BottomTab.Screen
-                  name="TrackListFlow"
-                  component={TrackListFlow}
+    <SafeAreaProvider>
+      <NavigationContainer ref={navigationRef}>
+        <AuthContext.Provider value={authHookObj}>
+            {authHookObj.state.token
+              ? <React.Fragment>
+                <BottomTab.Navigator>
+                  <BottomTab.Screen
+                    name="TrackListFlow"
+                    component={TrackListFlow}
+                    options={() => ({
+                      title: 'Tracks',
+                      tabBarIcon: _ => <FontAwesome name="th-list" size={20} />
+                    })}
+                  />
+                  <BottomTab.Screen
+                    name="TrackCreate"
+                    component={TrackCreateScreen}
+                  />
+                  <BottomTab.Screen
+                    name="Account"
+                    component={AccountScreen}
+                  />
+                </BottomTab.Navigator>
+              </React.Fragment>
+              : <Stack.Navigator initialRouteName="Signup">
+                <Stack.Screen
+                  name="Signup"
+                  component={SignupScreen}
                   options={() => ({
-                    title: 'Tracks',
-                    tabBarIcon: _ => <FontAwesome name="th-list" size={20} />
+                    header: _ => null
                   })}
                 />
-                <BottomTab.Screen
-                  name="TrackCreate"
-                  component={TrackCreateScreen}
+                <Stack.Screen
+                  name="Signin"
+                  component={SigninScreen}
+                  options={() => ({
+                    header: _ => null
+                  })}
                 />
-                <BottomTab.Screen
-                  name="Account"
-                  component={AccountScreen}
-                />
-              </BottomTab.Navigator>
-            </React.Fragment>
-            : <Stack.Navigator initialRouteName="Signup">
-              <Stack.Screen
-                name="Signup"
-                component={SignupScreen}
-                options={() => ({
-                  header: _ => null
-                })}
-              />
-              <Stack.Screen
-                name="Signin"
-                component={SigninScreen}
-                options={() => ({
-                  header: _ => null
-                })}
-              />
-            </Stack.Navigator>
-          }
-    </AuthContext.Provider>
-      </NavigationContainer>
+              </Stack.Navigator>
+            }
+      </AuthContext.Provider>
+        </NavigationContainer>
+    </SafeAreaProvider>
   );
 };
