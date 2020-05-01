@@ -7,17 +7,15 @@ const Map = props => {
   let test = []
   for(let i = 0; i < 20; i++) {
     test.push({
-      longitude: -112.21214 + i * 0.001,
-      latitude: 27.41235 + i * 0.001,
+      longitude: props.initialRegion.longitude + i * 0.001,
+      latitude: props.initialRegion.latitude + i * 0.001,
     })
   }
   return <View style={styles.container}>
-    <Text>111</Text>
     <MapView
       style={styles.mapStyle}
       initialRegion={{
-        longitude: -112.21214,
-        latitude: 27.41235,
+        ...props.initialRegion,
         longitudeDelta: 0.01,
         latitudeDelta: 0.01
       }}
@@ -25,6 +23,11 @@ const Map = props => {
       <Polyline coordinates={test} />
     </MapView>
   </View>
+}
+
+Map.defaultProps = {
+  longitude: -112.21214,
+  latitude: 27.41235,
 }
 
 const styles = StyleSheet.create({
