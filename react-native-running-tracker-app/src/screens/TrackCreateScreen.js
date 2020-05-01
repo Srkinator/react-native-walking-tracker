@@ -38,6 +38,7 @@ const TrackCreateScreen = () => {
             latitude: location.coords.latitude,
           }}
         />
+        {errorMsg && <Text>{errorMsg}</Text>}
       </View>
     </SafeAreaView>
   );
