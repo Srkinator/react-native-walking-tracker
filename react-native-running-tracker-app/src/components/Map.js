@@ -1,34 +1,27 @@
 import React from 'react'
 import MapView, { Polyline } from 'react-native-maps';
-import { StyleSheet, Text, View, Dimensions } from 'react-native';
+import { StyleSheet, Text, View, Dimensions, ActivityIndicator } from 'react-native';
 
 
-const Map = props => {
-  let test = []
-  for(let i = 0; i < 20; i++) {
-    test.push({
-      longitude: props.initialRegion.longitude + i * 0.001,
-      latitude: props.initialRegion.latitude + i * 0.001,
-    })
+const Map = ({ currentLocation, locations }) => {
+
+  if (!currentLocation) {
+    return <ActivityIndicator size="large" style={{ marginTop: 200 }} />
   }
+
   return <View style={styles.container}>
     <MapView
       style={styles.mapStyle}
       initialRegion={{
-        ...props.initialRegion,
-        longitudeDelta: 0.01,
-        latitudeDelta: 0.01
+        ...currentLocation.coords,
+        latitudeDelta: 0.01,
+        longitudeDelta: 0.01
       }}
     >
-      <Polyline coordinates={test} />
     </MapView>
   </View>
 }
 
-Map.defaultProps = {
-  longitude: -112.21214,
-  latitude: 27.41235,
-}
 
 const styles = StyleSheet.create({
   container: {

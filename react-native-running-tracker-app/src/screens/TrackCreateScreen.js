@@ -1,44 +1,40 @@
+import '../_mockLocation'
 import React, {
   useEffect,
-  useState
+  useState,
+  useContext,
+  useCallback
 } from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import * as Location from 'expo-location';
-
+import { useIsFocused } from '@react-navigation/native';
 
 import Map from '../components/Map';
+import { Context } from '../context/LocationContext'
+import usePermissions from '../hooks/usePermissions';
+
 
 const TrackCreateScreen = () => {
-  const [errorMsg, setErrorMsg] = useState('')
-  const [location, setLocation] = useState(null)
+  const { addLocation, state: { recording, currentLocation, locations } } = useContext(Context)
+  const isFocused = useIsFocused()
 
-  useEffect(() => {
-    (async () => {
-      let { status } = await Location.requestPermissionsAsync();
-      if (status !== 'granted') {
-        setErrorMsg('Permission to access location was denied');
-      }
+  const callback = useCallback(
+    location => {
+      addLocation(location, recording);
+    },
+    [recording]
+  );
 
-      let location = await Location.getCurrentPositionAsync({});
-      setLocation(location);
-    })();
-  }, [])
-
-  if (!location) {
-    return null
-  }
+  const [err] = usePermissions(isFocused || recording, callback);
 
   return (
     <SafeAreaView>
       <View>
         <Map
-          initialRegion={{
-            longitude: location.coords.longitude,
-            latitude: location.coords.latitude,
-          }}
+          currentLocation={currentLocation}
+          locations={locations}
         />
-        {errorMsg && <Text>{errorMsg}</Text>}
+        {err && <Text>{err}</Text>}
       </View>
     </SafeAreaView>
   );
