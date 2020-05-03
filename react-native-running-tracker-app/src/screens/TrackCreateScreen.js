@@ -20,7 +20,7 @@ const TrackCreateScreen = () => {
 
   const callback = useCallback(
     location => {
-      addLocation(location, recording);
+      addLocation(location, true);
     },
     [recording]
   );
