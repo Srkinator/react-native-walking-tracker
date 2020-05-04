@@ -9,7 +9,7 @@ const Map = ({ currentLocation, locations }) => {
     return <ActivityIndicator size="large" style={{ marginTop: 200 }} />
   }
 
-  return <View style={styles.container}>
+  return <View>
     <MapView
       style={styles.mapStyle}
       initialRegion={{
@@ -39,8 +39,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   mapStyle: {
-    width: Dimensions.get('window').width,
-    height: Dimensions.get('window').height,
+    height: 300,
   },
 });
 
