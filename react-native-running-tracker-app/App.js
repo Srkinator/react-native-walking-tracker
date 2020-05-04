@@ -48,10 +48,18 @@ export default () => {
                     <BottomTab.Screen
                       name="TrackCreate"
                       component={TrackCreateScreen}
+                      options={() => ({
+                        title: 'Add Track',
+                        tabBarIcon: _ => <FontAwesome name="plus" size={20} />
+                      })}
                     />
                     <BottomTab.Screen
                       name="Account"
                       component={AccountScreen}
+                      options={() => ({
+                        title: 'Account',
+                        tabBarIcon: _ => <FontAwesome name="gear" size={20} />
+                      })}
                     />
                   </BottomTab.Navigator>
                 </LocationContext>

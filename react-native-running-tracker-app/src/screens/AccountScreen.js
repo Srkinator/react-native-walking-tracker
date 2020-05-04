@@ -19,10 +19,6 @@ const AccountScreen = () => {
   );
 };
 
-AccountScreen.navigationOptions = {
-  title: 'Account',
-  tabBarIcon: <FontAwesome name="gear" size={20} />
-};
 
 const styles = StyleSheet.create({});
 
