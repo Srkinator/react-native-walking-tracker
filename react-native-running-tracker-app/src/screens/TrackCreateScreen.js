@@ -12,7 +12,7 @@ import { useIsFocused } from '@react-navigation/native';
 import Map from '../components/Map';
 import { Context } from '../context/LocationContext'
 import usePermissions from '../hooks/usePermissions';
-
+import TrackForm from '../components/TrackForm'
 
 const TrackCreateScreen = () => {
   const { addLocation, state: { recording, currentLocation, locations } } = useContext(Context)
@@ -20,7 +20,7 @@ const TrackCreateScreen = () => {
 
   const callback = useCallback(
     location => {
-      addLocation(location, true);
+      addLocation(location);
     },
     [recording]
   );
@@ -35,6 +35,7 @@ const TrackCreateScreen = () => {
           locations={locations}
         />
         {err && <Text>{err}</Text>}
+        <TrackForm />
       </View>
     </SafeAreaView>
   );

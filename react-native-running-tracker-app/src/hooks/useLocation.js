@@ -41,9 +41,9 @@ const useLocation = () => {
     dispatch({ type: 'stop_recording' });
   };
 
-  const addLocation = (location, recording) => {
+  const addLocation = (location) => {
     dispatch({ type: 'add_current_location', payload: location });
-    if (recording) {
+    if (state.recording) {
       dispatch({ type: 'add_location', payload: location });
     }
   };
