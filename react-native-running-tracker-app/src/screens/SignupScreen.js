@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import { View, StyleSheet } from 'react-native';
-import { AuthContext } from '../context/AuthContext';
+import AuthContext from '../context/AuthContext';
 import AuthForm from '../components/AuthForm';
 import NavLink from '../components/NavLink';
 

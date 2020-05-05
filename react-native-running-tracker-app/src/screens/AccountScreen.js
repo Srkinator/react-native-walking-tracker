@@ -3,7 +3,7 @@ import { StyleSheet, Text } from 'react-native';
 import { Button } from 'react-native-elements';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Spacer from '../components/Spacer';
-import { AuthContext } from '../context/AuthContext';
+import AuthContext from '../context/AuthContext';
 import { FontAwesome } from '@expo/vector-icons';
 
 const AccountScreen = () => {

@@ -13,6 +13,7 @@ import Map from '../components/Map';
 import { Context } from '../context/LocationContext'
 import usePermissions from '../hooks/usePermissions';
 import TrackForm from '../components/TrackForm'
+import { useTrackContext } from '../context/TrackContext'
 
 const TrackCreateScreen = () => {
   const { addLocation, state: { recording, currentLocation, locations } } = useContext(Context)
