@@ -14,9 +14,9 @@ import TrackListScreen from './src/screens/TrackListScreen';
 
 import useAuth from './src/hooks/useAuth'
 import { navigationRef } from './src/navigationRef'
-import { AuthContext } from './src/context/AuthContext'
+import AuthContext from './src/context/AuthContext'
 import LocationContext from './src/context/LocationContext'
-
+import TrackContext from './src/context/TrackContext'
 
 const Stack = createStackNavigator();
 const BottomTab = createBottomTabNavigator();
@@ -36,32 +36,34 @@ export default () => {
         <AuthContext.Provider value={authHookObj}>
               {authHookObj.state.token
                 ? <LocationContext>
-                  <BottomTab.Navigator>
-                    <BottomTab.Screen
-                      name="TrackListFlow"
-                      component={TrackListFlow}
-                      options={() => ({
-                        title: 'Tracks',
-                        tabBarIcon: _ => <FontAwesome name="th-list" size={20} />
-                      })}
-                    />
-                    <BottomTab.Screen
-                      name="TrackCreate"
-                      component={TrackCreateScreen}
-                      options={() => ({
-                        title: 'Add Track',
-                        tabBarIcon: _ => <FontAwesome name="plus" size={20} />
-                      })}
-                    />
-                    <BottomTab.Screen
-                      name="Account"
-                      component={AccountScreen}
-                      options={() => ({
-                        title: 'Account',
-                        tabBarIcon: _ => <FontAwesome name="gear" size={20} />
-                      })}
-                    />
-                  </BottomTab.Navigator>
+                    <TrackContext>
+                    <BottomTab.Navigator>
+                      <BottomTab.Screen
+                        name="TrackListFlow"
+                        component={TrackListFlow}
+                        options={() => ({
+                          title: 'Tracks',
+                          tabBarIcon: _ => <FontAwesome name="th-list" size={20} />
+                        })}
+                      />
+                      <BottomTab.Screen
+                        name="TrackCreate"
+                        component={TrackCreateScreen}
+                        options={() => ({
+                          title: 'Add Track',
+                          tabBarIcon: _ => <FontAwesome name="plus" size={20} />
+                        })}
+                      />
+                      <BottomTab.Screen
+                        name="Account"
+                        component={AccountScreen}
+                        options={() => ({
+                          title: 'Account',
+                          tabBarIcon: _ => <FontAwesome name="gear" size={20} />
+                        })}
+                      />
+                    </BottomTab.Navigator>
+                    </TrackContext>
                 </LocationContext>
                 : <Stack.Navigator initialRouteName="Signup">
                   <Stack.Screen
