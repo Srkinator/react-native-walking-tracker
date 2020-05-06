@@ -17,12 +17,12 @@ const useTrack = () => {
   const [state, dispatch] = useReducer(trackReducer, {})
 
   const fetchTracks = async () => {
-    const response = await trackerApi.get('/tracks');
+    const response = await axios.get('/tracks');
     dispatch({ type: 'fetch_tracks', payload: response.data });
   };
 
   const createTrack = async (name, locations) => {
-    await trackerApi.post('/tracks', { name, locations });
+    await axios.post('/tracks', { name, locations });
   };
 
   return {

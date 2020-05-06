@@ -13,9 +13,10 @@ import Map from '../components/Map';
 import { Context } from '../context/LocationContext'
 import usePermissions from '../hooks/usePermissions';
 import TrackForm from '../components/TrackForm'
-import { useTrackContext } from '../context/TrackContext'
 
-const TrackCreateScreen = () => {
+
+
+const TrackCreateScreen = ({ navigation }) => {
   const { addLocation, state: { recording, currentLocation, locations } } = useContext(Context)
   const isFocused = useIsFocused()
 
@@ -36,7 +37,7 @@ const TrackCreateScreen = () => {
           locations={locations}
         />
         {err && <Text>{err}</Text>}
-        <TrackForm />
+        <TrackForm navigation={navigation} />
       </View>
     </SafeAreaView>
   );
