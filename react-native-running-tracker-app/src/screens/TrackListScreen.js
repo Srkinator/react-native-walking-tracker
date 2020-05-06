@@ -1,18 +1,40 @@
+import React, { useEffect } from 'react';
+import { StyleSheet, FlatList, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { ListItem } from 'react-native-elements';
+import { useTrackContext } from '../context/TrackContext';
 
-import React, { useContext } from 'react';
-import { View, StyleSheet, Text } from 'react-native';
+const TrackListScreen = ({ navigation }) => {
+  const { state: { tracks, loading }, fetchTracks } = useTrackContext();
 
-import AuthContext from '../context/AuthContext';
+  useEffect(() => {
+    fetchTracks()
+  }, [])
 
+  if (loading) {
+    return <ActivityIndicator size="large" style={{ marginTop: 200 }} />
+  }
 
-const TrackListScreen = (props) => {
-  const authContext = useContext(AuthContext)
   return (
-    <View>
-      <Text style={{ fontSize: 48 }}>TrackListScreen</Text>
-    </View>
+    <>
+      <FlatList
+        data={tracks}
+        keyExtractor={item => item._id}
+        renderItem={({ item }) => {
+          return (
+            <TouchableOpacity
+              onPress={() =>
+                navigation.navigate('TrackDetail', { id: item._id })
+              }
+            >
+              <ListItem chevron title={item.name} />
+            </TouchableOpacity>
+          );
+        }}
+      />
+    </>
   );
 };
+
 
 const styles = StyleSheet.create({});
 
